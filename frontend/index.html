@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Task Manager</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <h1>Task Manager</h1>
+        <p>Organize your work. Stay productive.</p>
+    </header>
+
+    <main class="container">
+        <section id="auth-section" class="card">
+            <h2>Welcome</h2>
+
+            <div class="auth-forms">
+                <form id="login-form">
+                    <h3>Login</h3>
+
+                    <label for="login-username">Username</label>
+                    <input id="login-username" name="username" required>
+
+                    <label for="login-password">Password</label>
+                    <input id="login-password" name="password"
+                           type="password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+
+                <form id="register-form">
+                    <h3>Create an account</h3>
+
+                    <label for="register-username">Username</label>
+                    <input id="register-username" name="username" required>
+
+                    <label for="register-email">Email</label>
+                    <input id="register-email" name="email" type="email" required>
+
+                    <label for="register-password">Password</label>
+                    <input id="register-password" name="password" type="password" minlength="8" required>
+
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+
+            <p id="auth-message" role="status"></p>
+        </section>
+
+        <section id="dashboard-section" hidden>
+            <div class="dashboard-heading">
+                <div>
+                    <h2>My Dashboard</h2>
+                    <p>Manage your personal tasks.</p>
+                </div>
+                <button id="logout-button" class="secondary-button">
+                    Logout
+                </button>
+            </div>
+
+            <section id="stats-section" class="stats-grid">
+                <article class="card stat-card">
+                    <h3>Total Tasks</h3>
+                    <p id="total-count">0</p>
+                </article>
+
+                <article class="card stat-card">
+                    <h3>Pending</h3>
+                    <p id="pending-count">0</p>
+                </article>
+
+                <article class="card stat-card">
+                    <h3>In Progress</h3>
+                    <p id="in-progress-count">0</p>
+                </article>
+
+                <article class="card stat-card">
+                    <h3>Completed</h3>
+                    <p id="completed-count">0</p>
+                </article>
+            </section>
+
+            <section class="card">
+                <h2 id="task-form-heading">Create a task</h2>
+
+                <form id="task-form">
+                    <label for="task-title">Title</label>
+                    <input id="task-title" name="title"
+                           maxlength="100" required>
+
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description"
+                              name="description" rows="3"></textarea>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="task-status">Status</label>
+                            <select id="task-status" name="status">
+                                <option value="PENDING">Pending</option>
+                                <option value="IN_PROGRESS">In Progress</option>
+                                <option value="COMPLETED">Completed</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="task-priority">Priority</label>
+                            <select id="task-priority" name="priority">
+                                <option value="LOW">Low</option>
+                                <option value="MEDIUM" selected>Medium</option>
+                                <option value="HIGH">High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="task-due-date">Due date</label>
+                    <input id="task-due-date" name="due_date" type="date">
+
+                    <div class="button-row">
+                        <button id="save-task-button" type="submit">
+                            Create Task
+                        </button>
+                        <button id="cancel-edit-button"
+                                type="button" class="secondary-button" hidden>
+                            Cancel Edit
+                        </button>
+                    </div>
+                </form>
+
+                <p id="task-message" role="status"></p>
+            </section>
+
+            <section class="card">
+                <h2>My Tasks</h2>
+
+                <div class="form-row filters">
+                    <div>
+                        <label for="search-input">Search</label>
+                        <input id="search-input"
+                               placeholder="Search tasks...">
+                    </div>
+
+                    <div>
+                        <label for="filter-status">Status</label>
+                        <select id="filter-status">
+                            <option value="">All statuses</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="IN_PROGRESS">In Progress</option>
+                            <option value="COMPLETED">Completed</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="filter-priority">Priority</label>
+                        <select id="filter-priority">
+                            <option value="">All priorities</option>
+                            <option value="LOW">Low</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="HIGH">High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="task-list" class="task-list"></div>
+
+                <div class="pagination">
+                    <button id="previous-page" class="secondary-button">
+                        Previous
+                    </button>
+                    <span id="page-info">Page 1</span>
+                    <button id="next-page" class="secondary-button">
+                        Next
+                    </button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="{% static 'app.js' %}"></script>
+</body>
+</html>
